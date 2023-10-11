@@ -1,0 +1,7 @@
+For SSH key use in github
+
+```
+
+cat ~/.ssh/id_ed25519.pub
+
+```
