@@ -2,6 +2,14 @@ For SSH key use in github
 
 ```
 
-cat ~/.ssh/id_ed25519.pub
+$cat ~/.ssh/id_ed25519.pub
+
+```
+
+To get the information about your current Go installation and environment:
+
+```
+
+$go env
 
 ```
