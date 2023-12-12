@@ -13,3 +13,8 @@ To get the information about your current Go installation and environment:
 $go env
 
 ```
+To kill the port started
+
+```
+
+$kill -9 ` lsof -t -i:4000`
