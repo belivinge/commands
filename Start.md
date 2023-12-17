@@ -36,4 +36,4 @@ Go is clever enough to recognize that our code is importing a new third-party pa
 **RESTful Routing Example**
 We add a HTML form to the web application so that users can create new snippets
 
-![Web Visualization]()
+![Web Visualization](https://github.com/belivinge/commands/blob/master/aoaoa.png)
