@@ -41,3 +41,8 @@ We add a HTML form to the web application so that users can create new snippets
 **Installing a Router**
 hundred third-party routers: Pat(for simple structure) and Gorilla Mux(for full-featured) are recommended
 - Pat matches patterns in order that they are registered
+
+**Parsing from Data**
+1) r.ParseForm() method to parse the request body. It checks if the request body is well-formed, and then stores the data in r.PostForm map. If there any errors when parsing the body, then it will return an error.
+2) Get the data form r.ParseForm() by using the r.PostForm.Get() method. for example title - > r.PostForm.Get("title")
+
