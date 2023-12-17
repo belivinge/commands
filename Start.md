@@ -37,3 +37,7 @@ Go is clever enough to recognize that our code is importing a new third-party pa
 We add a HTML form to the web application so that users can create new snippets
 
 ![Web Visualization](https://github.com/belivinge/commands/blob/master/aoaoa.png)
+
+**Installing a Router**
+hundred third-party routers: Pat(for simple structure) and Gorilla Mux(for full-featured) are recommended
+- Pat matches patterns in order that they are registered
