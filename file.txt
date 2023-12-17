@@ -18,3 +18,13 @@ To kill the port started
 ```
 
 $kill -9 ` lsof -t -i:4000`
+
+```
+
+To manage middleware/handler chains use:
+
+```
+
+https://github.com/justinas/alice
+
+```
