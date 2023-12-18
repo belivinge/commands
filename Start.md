@@ -59,3 +59,15 @@ we then use this variable in *eq* function to add the checked attribute to the r
 **Forms**
 If your application has many *forms* then there will be lots of repetition in the code and validation rule.
 So, you better create a separate folder where you save your forms package to return to it time by time if there is any error.
+
+**Satetful HTTP**
+To display one-time confirmation message - > we need to share data(or state) between HTTP requests for the user. The most common way to do that is to create a *session* for the user
+
+Good session management packages:
+- gorilla/sessions
+- alexedwards/scs
+- golangcollege/sessions  
+
+To add the confirmation message we use the *Session.Put() method. - > ``app.session.Put(r, "flash", "Snippet successfully created!")`` where the second parameter is the key for the data
+To retrieve the data we use the *Session.Get() method or alternatively, the *Session.GetString which takes care of the type conversion
+Then to remove it, we use the *Session.PopString() method 
