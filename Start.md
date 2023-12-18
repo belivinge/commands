@@ -71,3 +71,23 @@ Good session management packages:
 To add the confirmation message we use the *Session.Put() method. - > ``app.session.Put(r, "flash", "Snippet successfully created!")`` where the second parameter is the key for the data
 To retrieve the data we use the *Session.Get() method or alternatively, the *Session.GetString which takes care of the type conversion
 Then to remove it, we use the *Session.PopString() method 
+
+**Security Improvements**
+
+- create a self-signed TLS certification
+- all responses and requests are served securely over HTTPS
+- sensible tweaks to the default TLS settings
+- set connection timeouts to prevent slow-client attacks
+
+HTTPS is essentially HTTP sent across a TLS (Transport Layer Security) connection. Because it's sent over a TLS connection the data is encrypted and signed, which helps ensure its privacy and integrity during transit.
+
+TLS - > modern version of SSL (Secure Sockets Layer). 
+
+To start using HTTPS, generate a TLS certificate. For development purposes the simplest thing to do is to generate own self-signed certificate.
+
+``go run /usr/local/go/src/crypto/tls/generate_cert.go --rsa-bits=2048 --host=localhost``
+
+how it works:
+1. Generates a 2048-bit RSA key, which is cryptographically secure - > public and private key
+2. It then stores the private key in a key.pem file, and generates a self-signed TLS certificate for the localhost containing public key which is stored then in a cert.pem file.
+
