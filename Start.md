@@ -46,3 +46,16 @@ hundred third-party routers: Pat(for simple structure) and Gorilla Mux(for full-
 1) r.ParseForm() method to parse the request body. It checks if the request body is well-formed, and then stores the data in r.PostForm map. If there any errors when parsing the body, then it will return an error.
 2) Get the data form r.ParseForm() by using the r.PostForm.Get() method. for example title - > r.PostForm.Get("title")
 
+**Creating template**
+
+``{{$exp := or (.FormData.Get "expires") "365"}}``
+
+it creates a new $exp template variable which uses *or* template function to set the variable to the value holded by .FormData.Get "expires" or if it is empty then the default value of "365" 
+
+we then use this variable in *eq* function to add the checked attribute to the radio button:
+
+``{{if (eq $exp "365")}}checked{{end}}``
+
+**Forms**
+If your application has many *forms* then there will be lots of repetition in the code and validation rule.
+So, you better create a separate folder where you save your forms package to return to it time by time if there is any error.
