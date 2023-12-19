@@ -91,3 +91,28 @@ how it works:
 1. Generates a 2048-bit RSA key, which is cryptographically secure - > public and private key
 2. It then stores the private key in a key.pem file, and generates a self-signed TLS certificate for the localhost containing public key which is stored then in a cert.pem file.
 
+![Web Visualization](https://github.com/belivinge/commands/blob/master/bababa.png)
+
+After we set this, our server will still be listening on port 4000 - but now it will be taking HTTPS, not HTTP. And every time it will show "Your connection is not secure" warning.
+
+If you press Ctrl+i using Firefox, the 'Technical Details' section confirms that the connection is encrypted and working as expected.
+
+'Acme Co' is a hard-coded placeholder name. HTTPS also automatically updates to the HTTP/2 version if user connection supports it. It makes pages load faster for users.
+The user that is used to run the Go application must have read permissions for both cert.pem and key.pem files, otherwise ListenAndServeTLS() will return a *permission denied* error.
+
+By default, the generate_cert.go grants read permission for all users for the cert.pem file, but read permission for key.pem file only to the owner.  
+
+![Web Visualization](https://github.com/belivinge/commands/blob/master/cacac.png)
+
+If you want to add an ignore rule so the *.pem files are not accidentally committed:
+
+``$ echo 'tls/' >> .gitignore ``
+
+**Restricting Cipher Suites**
+It may be desirable to limit HTTPS server to only support cipher suits which use ECDHE(forward secrecy), because there are some weak cipher suits that you might want not to use RC4, 3DES or CBC.
+
+It is done via:
+
+![Web Visualization](https://github.com/belivinge/commands/blob/master/dododod.png)
+
+If there is no timeouts like Idle, Read and Write, then it is easy to get slow-client attacks, known such as *Slowloris* - which can keep a connection open indefinitely by sending incomplete requests - > affected servers will keep these connections open, filling their maximum concurrent connection pool, by time denying additional connection attempts from clients.
