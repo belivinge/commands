@@ -115,4 +115,44 @@ It is done via:
 
 ![Web Visualization](https://github.com/belivinge/commands/blob/master/dododod.png)
 
-If there is no timeouts like Idle, Read and Write, then it is easy to get slow-client attacks, known such as *Slowloris* - which can keep a connection open indefinitely by sending incomplete requests - > affected servers will keep these connections open, filling their maximum concurrent connection pool, by time denying additional connection attempts from clients.
+If there is no timeouts like Idle, Read and Write, then it is easy to get slow-client attacks, known such as *Slowloris* - which can keep a connection open indefinitely by sending incomplete requests - > affected servers will keep these connections open, filling their maximum concurrent connection pool, by time denying additional connection attempts from clients. Setting ReadHeaderTimout but not ReadTimeOut and IdleTimeOut will make default connection timeout for both of them as in ReadHeaderTimeOut.
+TLS versions are defined as constants in the crypto/tls package.
+
+You can change your server to only support TLS 1.2. As in the picture:
+
+![Web Visualization](https://github.com/belivinge/commands/blob/master/keen.png)
+
+**User Authentication**
+1. A user  registers by visiting a form at /user/signup and entering their name, email address and password. We store this data in a new users database table.
+
+2. A user logs using /user/login and entering their email and password.
+
+3. we then check the database and search for any matches with the credentials they entered. If there's any match, we add the relevant id value to their data session using the key "userID".
+
+4. If "userID" value exists, we keep checking this until the session expires. 
+
+What's learned:
+- how to implement login, logout and signup functionalities for users.
+- a secure way to encrypt and store user passwords in database using *Bcrypt*.
+- Using middleware and sessions to verify that a user is logged
+- how to prevent cross-site request forgery (CSRF) attacks.
+
+![Web Visualization](https://github.com/belivinge/commands/blob/master/blabla.png)
+
+POST method - > to submit something, for example to logout we don't need GET.
+GET method - > to open without any functioning, just to be on the page. For expample for /static/ we need only GET.
+
+**User SignUp and Password Encryption**
+
+``
+        <label>Name:</label>
+        {{with .Errors.Get "name"}}
+        <label class="error">{{.}}</label>
+        {{end}}
+        <input type="text" name="name" value="{{.Get 'name'}}">
+``
+
+if any error occurs, we re-display the values by {{with .Errors.Get "value"}} code. But we are not re-displaying password to protect the server from any risk of the browser cachingthe plain-text password entered by the user.
+
+**Validating the User Input**
+We can check for validation using a regular expression. For that we create two helper functions - > MinLength() and MatchesPattern()
