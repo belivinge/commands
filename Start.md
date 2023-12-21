@@ -156,3 +156,14 @@ if any error occurs, we re-display the values by {{with .Errors.Get "value"}} co
 
 **Validating the User Input**
 We can check for validation using a regular expression. For that we create two helper functions - > MinLength() and MatchesPattern()
+
+**User Authorization**
+1. Only authorized users can create a new snippet
+2. The contents of the navigation bar changes depending whether a user is authenticated or not.
+
+Also even if we make these changes, the unauthorized user can create a snippet by visiting */sneep/create*. So we need to restrict the access to this route via middleware.
+To do this we use the requireAuthenticatedUser() middleware which redirects to the login page if the user is not logged in.
+
+``
+mux.Post("/user/logout", dynamicMiddleware.Append(app.requireAuthenticatedUser).ThenFunc(app.logoutUser))
+``
