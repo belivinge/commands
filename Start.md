@@ -167,3 +167,26 @@ To do this we use the requireAuthenticatedUser() middleware which redirects to t
 ``
 mux.Post("/user/logout", dynamicMiddleware.Append(app.requireAuthenticatedUser).ThenFunc(app.logoutUser))
 ``
+
+Without using alice package:
+``
+mux.Get("/snippet/create", app.session.Enable(app.requireAuthenticatedUser(http...
+``
+**CSRF Protection**
+https://www.gnucitizen.org/blog/csrf-demystified/ - > a form of cross-domain attack where a malicious third-party sends sends state-changing HTTP requests to your website.
+
+![Web Visualization](https://github.com/belivinge/commands/blob/master/hoho.png)
+
+one mitigation that we can take to prevent this attack is the SameSite Cookies:
+
+``
+session := sessions.New([]byte(*secret))
+session.Lifetime = 12 * time.Hour
+session.Secure = true
+session.SameSite = http.SameSiteStrictMode
+``
+
+By default the sessions package always sets SameSite=Lax on the session cookie, which means that cookie won't be sent by user's browser for cross-site usage.
+
+One of the forms we need to protect from CSRF is the logout form, which is included in the base_layout.html and could appear on any page of our application.
+So we need to use noSurf() middleware on all application routes.
