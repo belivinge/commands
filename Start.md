@@ -190,3 +190,18 @@ By default the sessions package always sets SameSite=Lax on the session cookie, 
 
 One of the forms we need to protect from CSRF is the logout form, which is included in the base_layout.html and could appear on any page of our application.
 So we need to use noSurf() middleware on all application routes.
+
+**Request context**
+Every http.Request has a *context.Context* in it which we can use to store information during the lifetime of the request.
+Use-case for this is to pass information between middleware and handlres
+
+![Web Visualization](https://github.com/belivinge/commands/blob/master/bbc.png)
+
+documentation for context.Context warns:
+
+``
+Use context Values only for request-scoped data that transits processes and APIs.
+``
+which means the dependencies that exist outside of the request shouldn't be passed.
+
+**Testing**
