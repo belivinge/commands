@@ -28,3 +28,18 @@ To manage middleware/handler chains use:
 https://github.com/justinas/alice
 
 ```
+
+ssh: connect to host github.com port 22: Connection timed out
+
+```
+
+nano ~/.ssh/config
+
+then add to it:
+
+Host github.com
+ Hostname ssh.github.com
+ Port 443
+
+ssh -T git@github.com - > to confirm
+
