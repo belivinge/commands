@@ -1,0 +1,34 @@
+Clone the Source Repository:
+
+```
+git clone <URL_of_Repository_A>
+cd Repository_A
+```
+
+Add a Remote for the Destination Repository:
+
+```
+git remote add destination <URL_of_Repository_B>
+```
+
+Fetch the Destination Repository:
+
+``
+git fetch destination
+``
+
+Merge the Source Repository into a New Branch in the Destination Repository:
+
+```
+git checkout -b new-branch destination/main
+git merge --allow-unrelated-histories origin/main
+```
+
+Resolve any Merge Conflicts:
+If there are any conflicts during the merge, Git will inform you. Resolve the conflicts manually and commit the changes.
+
+Push the Changes to the Destination Repository:
+
+```
+git push destination new-branch
+```
