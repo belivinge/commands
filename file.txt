@@ -43,3 +43,11 @@ Host github.com
 
 ssh -T git@github.com - > to confirm
 
+```
+
+It’s possible to only run specific tests by using the -run flag. This allows you to pass in a regular expression — and only tests with a name that matches the
+regular expression will be run. For example, we could opt to run only the TestPing test as follows:
+
+```
+$ go test -v -run="^TestPing$" ./cmd/web/
+```
